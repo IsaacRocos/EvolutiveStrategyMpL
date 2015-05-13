@@ -1,0 +1,56 @@
+'''
+Created on 10/05/2015
+
+@author: Isaac
+'''
+from math import cos
+from EvolutivoMPL import EvolutivoMPL
+
+
+class Shubert(EvolutivoMPL):
+    '''
+    classdocs
+    '''
+
+    def __init__(self):
+        
+        self.sigma = 0.2
+        self.exitos = 0
+        self.fracasos = 0
+        self.CExplotar = 0.817
+        self.CExplorar = 1.01
+        self.numVar = 2
+        self.nPadres = 10 
+        self.nHijos = 5
+        self.padres = []
+        self.hijos = []
+        self.MAX_ITER = 5000
+        self.interInf = -10
+        self.interSup = 10
+    
+    #@Override
+    def aptitud(self,individuo):
+        fx1sum = 0
+        fx2sum = 0
+        x1 = individuo[0]
+        x2 = individuo[1]
+        for i in range(5):
+            sx1 = (i+1) * cos((i+1+1)*x1 + (i+1))
+            sx2 = (i+1) * cos((i+1+1)*x2 + (i+1))
+            fx1sum = fx1sum+sx1
+            fx2sum = fx2sum+sx2
+            
+        fx = fx1sum * fx2sum
+        return fx
+    
+    def info(self,iter):
+        if(iter ==0):
+            print '***********************************'
+            print "| EJECUTANDO (7) ShubertFunction  |"
+            print '***********************************'
+        else:
+            print '========== Ejecucion',iter+1,'=========='
+
+        
+#funShubert = Shubert()
+#funShubert.RUN() 
